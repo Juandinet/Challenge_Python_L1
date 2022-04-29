@@ -13,7 +13,7 @@ from sqlalchemy import create_engine
 url='https://restcountries.com/v2/name/'
 formato='?fullText=true'
 
-listadePaises = ["Angola","Argentina", "Brasil", "Chile", "Colombia", "Ecuador", "Paraguay", "Uruguay", "Venezuela", "españa"]
+listadePaises = ["Angola","Argentina", "Brasil", "Chile", "Colombia", "Ecuador", "Paraguay", "Uruguay", "Venezuela", "españa","Valledupar"]
 
 def obtenerDatosdelPais(pais):
     """Dado el nombre de un pais, devuelve una lista con los datos del pais
@@ -55,6 +55,7 @@ if __name__=='__main__':
         indiceFilas+=1
     
     print(df)
+    
     print("Tiempo total: ",df["Time(ms)"].sum(), "ms")    
     print("Tiempo promedio: ",df["Time(ms)"].mean(), "ms")    
     print("Tiempo Mínimo: ",df["Time(ms)"].min(), "ms")
@@ -67,4 +68,5 @@ if __name__=='__main__':
     # Guardar en un json
     df.to_json('data.json')
     
-    print(engine.execute("SELECT * FROM paises").fetchall())
+    #print(engine.execute("SELECT * FROM paises").fetchall())
+    
