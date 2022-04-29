@@ -47,23 +47,24 @@ def generarFila(pais):
         return fila
 
 if __name__=='__main__':
-    # print("Bienvenido a la lista de paises")
-    # print("Estos son los paises de nuestra lista")
-    # print(listadePaises)
     indiceFilas=0
     df=pd.DataFrame(columns=["Region", "Country Name","Languaje", "Time(ms)"])
     for pais in listadePaises:
         df.loc[indiceFilas]=generarFila(pais)
         # df = df.append(generarFila(pais),ignore_index=True)
-        
         indiceFilas+=1
+    
     print(df)
     print("Tiempo total: ",df["Time(ms)"].sum(), "ms")    
     print("Tiempo promedio: ",df["Time(ms)"].mean(), "ms")    
     print("Tiempo Mínimo: ",df["Time(ms)"].min(), "ms")
-    print("Tiempo Máximo: ",df["Time(ms)"].max(), "ms")  
+    print("Tiempo Máximo: ",df["Time(ms)"].max(), "ms")
+
+    # Guardar en una base de datos 
     engine=create_engine('sqlite://', echo=False)  
     df.to_sql('paises', engine, if_exists='replace')
-    print(engine.execute("SELECT * FROM paises").fetchall())
     
-
+    # Guardar en un json
+    df.to_json('data.json')
+    
+    print(engine.execute("SELECT * FROM paises").fetchall())
