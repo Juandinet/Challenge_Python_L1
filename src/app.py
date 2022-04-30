@@ -1,19 +1,10 @@
 import time
 import requests
-# import json
 import pandas as pd
 import hashlib
 from sqlalchemy import create_engine
-# import locale
 df=pd.DataFrame(columns=["Region", "Country Name","Languaje", "Time(ms)"])
 engine=create_engine('sqlite://', echo=False)
-# locale.setlocale(locale.LC_ALL, '')
-
-
-
-
-
-
 
 def obtenerDatosdelPais(pais):
     """Dado el nombre de un pais, devuelve una lista con los datos del pais
@@ -27,21 +18,22 @@ def obtenerDatosdelPais(pais):
         return None
 
 def generarFila(pais):
-        startTime=time.time()
-        datosPais = obtenerDatosdelPais(pais)
-        if datosPais is not None:
-            idioma=datosPais[0]['languages'][0]['name']
-            hash_idioma = hashlib.sha1(idioma.encode('utf-8')).hexdigest()
-            endTime=time.time()
-            tiempo=(endTime-startTime)*1000
-            # fila = {"Region":datosPais[0]['region'], "Country Name":datosPais[0]['name'],"Languaje":hash_idioma.hexdigest(), "Time":tiempo}
-            fila=[datosPais[0]['region'],datosPais[0]['name'],hash_idioma,tiempo]
-        else:
-            endTime=time.time()
-            tiempo=(endTime-startTime)*1000
-            # fila=["",pais,"No se encontraron datos",tiempo]           
-            fila=None           
-        return fila
+    """Dado el nombre de un pais, devuelve una lista con los datos del pais"""
+    startTime=time.time()
+    datosPais = obtenerDatosdelPais(pais)
+    if datosPais is not None:
+        idioma=datosPais[0]['languages'][0]['name']
+        hash_idioma = hashlib.sha1(idioma.encode('utf-8')).hexdigest()
+        endTime=time.time()
+        tiempo=(endTime-startTime)*1000
+        # fila = {"Region":datosPais[0]['region'], "Country Name":datosPais[0]['name'],"Languaje":hash_idioma.hexdigest(), "Time":tiempo}
+        fila=[datosPais[0]['region'],datosPais[0]['name'],hash_idioma,tiempo]
+    else:
+        endTime=time.time()
+        tiempo=(endTime-startTime)*1000
+        # fila=["",pais,"No se encontraron datos",tiempo]           
+        fila=None           
+    return fila
 
 def adicionarFila(pais,df):
     '''Usando la funcion generarFilas(pais) Agrega una fila al dataframe df
