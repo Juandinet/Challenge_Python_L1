@@ -31,11 +31,11 @@ def generarFila(pais):
         datosPais = obtenerDatosdelPais(pais)
         if datosPais is not None:
             idioma=datosPais[0]['languages'][0]['name']
-            hash_idioma = hashlib.sha1(b'{idioma}')
+            hash_idioma = hashlib.sha1(idioma.encode('utf-8')).hexdigest()
             endTime=time.time()
             tiempo=(endTime-startTime)*1000
             # fila = {"Region":datosPais[0]['region'], "Country Name":datosPais[0]['name'],"Languaje":hash_idioma.hexdigest(), "Time":tiempo}
-            fila=[datosPais[0]['region'],datosPais[0]['name'],hash_idioma.hexdigest(),tiempo]
+            fila=[datosPais[0]['region'],datosPais[0]['name'],hash_idioma,tiempo]
         else:
             endTime=time.time()
             tiempo=(endTime-startTime)*1000
@@ -60,7 +60,7 @@ def adicionarFila(pais,df):
     
 
 if __name__=='__main__':
-    listadePaises = ["Angola","Argentina", "Brasil", "Chile", "Colombia", "Ecuador", "Paraguay", "Uruguay", "Venezuela", "España","Valledupar"]
+    listadePaises = ["Angola","Argentina", "Brasil", "Chile", "Colombia", "United States of America", "United K", "Uruguay", "Venezuela", "España","Valledupar"]
     for pais in listadePaises:
         adicionarFila(pais,df)
     

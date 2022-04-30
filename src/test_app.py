@@ -37,14 +37,14 @@ class TestApp(unittest.TestCase):
         fila = app.generarFila(pais)
         self.assertEqual(fila[0], 'Europe')
         self.assertEqual(fila[1], 'Spain')
-        # self.assertEqual(fila[2], 'sha1$5f47a1b3$1$3c3e3a8a2b9d2a7a9a9b9c1b076b0d6b1c6e5e0f')
+        self.assertEqual(fila[2], '8df7f1b361b2af42d36011e00d22c0f9891ec0b0')
 
     def test_generarFila_Col(self):
         pais = 'Colombia'
         fila = app.generarFila(pais)
         self.assertEqual(fila[0], 'Americas')
         self.assertEqual(fila[1], 'Colombia')
-        # self.assertEqual(fila[2], 'sha1$5f47a1b3$1$3c3e3a8a2b9d2a7a9a9b9c1b076b0d6b1c6e5e0f')    
+        self.assertEqual(fila[2], '8df7f1b361b2af42d36011e00d22c0f9891ec0b0')    
     
     
     def test_generarFila_Ang(self):
@@ -52,7 +52,7 @@ class TestApp(unittest.TestCase):
         fila = app.generarFila(pais)
         self.assertEqual(fila[0], 'Africa')
         self.assertEqual(fila[1], 'Angola')
-        # self.assertEqual(fila[2], 'sha1$5f47a1b3$1$3c3e3a8a2b9d2a7a9a9b9c1b076b0d6b1c6e5e0f')
+        self.assertEqual(fila[2], '23882c575954a0789bf02aba9e6dd01f539bc738')
 
     def test_generarFila_Valle(self):
         pais = 'Valledupar'
