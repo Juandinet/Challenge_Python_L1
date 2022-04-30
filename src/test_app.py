@@ -60,10 +60,13 @@ class TestApp(unittest.TestCase):
         self.assertEqual(fila, None)
     
     def test_adicionarFila(self):
-        listadePaises = ["Angola","Argentina", "Brasil", "Chile", "Colombia", "Ecuador", "Paraguay", "Uruguay", "Venezuela", "España","Valledupar"]
+        listadePaises = ["Angola","Argentina","España","Valledupar"]
         for pais in listadePaises:
             app.adicionarFila(pais, df)
         self.assertEqual(df["Region"][0], 'Africa')
+        self.assertEqual(df["Country Name"][0], 'Angola')
+        self.assertEqual(df["Region"][1], 'Americas')
+        self.assertEqual(df["Country Name"][1], 'Argentina')
         self.assertEqual(df["Region"][len(df)-1], 'Europe')
             
     
