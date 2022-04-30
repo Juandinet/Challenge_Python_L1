@@ -25,7 +25,7 @@ Es un plus si:
 - Presenta un diseño de su solucion.
 
 # DESARROLLO DE LA SOLUCIÓN
-## En un entorno virtual usando Python3 , pip y la siguiente lista de dependencias
+## En un entorno virtual usando Python3 , pip y la siguiente lista de dependencias (requirements.txt)
 - certifi==2021.10.8
 - charset-normalizer==2.0.12
 - greenlet==1.1.2
@@ -40,7 +40,7 @@ Es un plus si:
 - urllib3==1.26.9
 
 
-Luego si no está instalado, instalamos virtualenv
+Si no está instalado, instalamos virtualenv
 
 ```powershell
 pip install virtualenv
@@ -58,7 +58,7 @@ para poner a funcionar el entorno virtual, se debe ejecutar:
 .\env\Scripts\activate
 ```
 
-Para instalar los requerimientos en un nuevo entorno, se inicia el entorno virtual y se ejecuta el siguiente comando:
+Una vez iniciado el entorno virtual, se ejecuta el siguiente comando:
 
 ```powershell
 pip install -r .\requirements.txt
@@ -70,3 +70,8 @@ Para correr la solución se ejecuta el siguiente comando:
 python .\src\app.py
 ```
 
+Para correr los test unitarios se ejecuta el siguiente comando:
+
+```powershell
+python .\src\test_app.py
+```
