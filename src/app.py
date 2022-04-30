@@ -49,10 +49,7 @@ def adicionarFila(pais,df):
     fila = generarFila(pais)
     if fila!=None:
         df.loc[len(df)]=fila
-        # Guardar en una base de datos 
-        df.to_sql('paises', engine, if_exists='replace')
-        # Guardar en un json
-        df.to_json('data.json')
+        
     else:
         print("No se encontraron datos para el pais: ", pais)
     return df
@@ -60,7 +57,7 @@ def adicionarFila(pais,df):
     
 
 if __name__=='__main__':
-    listadePaises = ["Angola","Argentina", "Brasil", "Chile", "Colombia", "United States of America", "United K", "Uruguay", "Venezuela", "España","Valledupar"]
+    listadePaises = ["Angola","Argentina", "Brasil", "Chile", "Colombia", "United States of America", "United K", "Uruguay", "Venezuela", "España","Valledupar","Bogota"]
     for pais in listadePaises:
         adicionarFila(pais,df)
     
@@ -72,7 +69,10 @@ if __name__=='__main__':
     print("Tiempo Mínimo: ",df["Time(ms)"].min(), "ms")
     print("Tiempo Máximo: ",df["Time(ms)"].max(), "ms")
 
-    
+    # Guardar DataFrame en una base de datos 
+    df.to_sql('paises', engine, if_exists='replace')
+    # Guardar DataFrame en un json
+    df.to_json('data.json')
     
     
     
