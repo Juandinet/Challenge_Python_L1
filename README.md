@@ -67,7 +67,7 @@ pip install -r .\requirements.txt
 Para correr la solución se ejecuta el siguiente comando:
 
 ```powershell
-.\src\app.py "Angola","Argentina", "Brasil", "Chile", "Colombia", "United States of America", "United K", "Uruguay", "Venezuela", "España","Valledupar","Bogota"
+.\src\app.py "Angola", "Brasil", "Colombia", "United States of America", "United K", "Venezuela", "España","Valledupar","Bogota"
 ```
 
 Para correr los test unitarios se ejecuta el siguiente comando:
