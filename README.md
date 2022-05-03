@@ -64,7 +64,7 @@ Una vez iniciado el entorno virtual, se ejecuta el siguiente comando:
 pip install -r .\requirements.txt
 ```
 
-Para correr la solución se ejecuta el siguiente comando:
+Para correr la solución se ejecuta el siguiente comando, se pasa una lista de paises, separados por coma y entre comillas los nombres para evitar inconvenientes con los espacios.
 
 ```powershell
 .\src\app.py "Angola", "Brasil", "Colombia", "United States of America", "United K", "Venezuela", "España","Valledupar","Bogota"
