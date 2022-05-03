@@ -76,7 +76,8 @@ Para correr los test unitarios se ejecuta el siguiente comando:
 python .\src\test_app.py
 ```
 
-#Diseño de la solución
+# Diseño de la solución
+
 La app recibe parámetros por consola, en este caso un país o lista de países separados por coma(,) y debe hacer la consulta de cada país a la URI: https://restcountries.com/ con el fin de obtener la información de cada país solicitado (uno por uno), para ello la maquina donde ese ejecute debe tener el suficiente acceso a internet para realizar la consulta y recibir la respuesta.
 
 Luego internamente genera un a fila de la tabla teniendo en cuenta el tiempo que se lleve realizar la consulta y armar la fila en general.
