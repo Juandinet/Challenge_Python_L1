@@ -63,8 +63,7 @@ if __name__=='__main__':
         # print(listadePaises)
         for pais in listadePaises:
             df=adicionarFila(pais,df)
-            df.to_sql('paises',engine,if_exists='replace',index=False)
-            df.to_json('paises.json',orient='records')
+            
     
         print('_____________________________________________________________')
 
