@@ -24,6 +24,23 @@ Es un plus si:
 - Entrega Test Unitarios
 - Presenta un diseño de su solucion.
 
+![avatar](test.png)
+
+
+# Diseño de la solución
+
+La app recibe parámetros por consola, en este caso un país o lista de países separados por coma(,) y debe hacer la consulta de cada país a la URI: https://restcountries.com/ con el fin de obtener la información de cada país solicitado (uno por uno), para ello la maquina donde ese ejecute debe tener el suficiente acceso a internet para realizar la consulta y recibir la respuesta.
+
+Luego internamente genera un a fila de la tabla teniendo en cuenta el tiempo que se lleve realizar la consulta y armar la fila en general.
+
+Estas filas las va recibiendo una función que va agregando las filas al Data Frame (Pandas)
+
+Luego de procesar toda la lista de países recibida, procede a guardar en SQLite una tabla llamada países y exporta a un archivo “data.json” como lo dicta el requerimiento.
+
+Finalmente, la aplicación imprime por consola el Data Frame, genera e imprime los datos de Tiempo total, promedio,  máximo y mínimo de la columna de tiempos del Data Frame, usando las funciones que Pandas tiene para ello.
+
+A modo de prueba, al final se hace una consulta a la tabla en SQLite y se imprime la lista resultante por consola, pero esta parte no va en una posible versión de producción. 
+
 # DESARROLLO DE LA SOLUCIÓN
 ## En un entorno virtual usando Python3 , pip y la siguiente lista de dependencias (requirements.txt)
 - certifi==2021.10.8
@@ -38,6 +55,7 @@ Es un plus si:
 - six==1.16.0
 - SQLAlchemy==1.4.36
 - urllib3==1.26.9
+
 
 
 Si no está instalado, instalamos virtualenv
@@ -76,16 +94,4 @@ Para correr los test unitarios se ejecuta el siguiente comando:
 python .\src\test_app.py
 ```
 
-# Diseño de la solución
 
-La app recibe parámetros por consola, en este caso un país o lista de países separados por coma(,) y debe hacer la consulta de cada país a la URI: https://restcountries.com/ con el fin de obtener la información de cada país solicitado (uno por uno), para ello la maquina donde ese ejecute debe tener el suficiente acceso a internet para realizar la consulta y recibir la respuesta.
-
-Luego internamente genera un a fila de la tabla teniendo en cuenta el tiempo que se lleve realizar la consulta y armar la fila en general.
-
-Estas filas las va recibiendo una función que va agregando las filas al Data Frame (Pandas)
-
-Luego de procesar toda la lista de países recibida, procede a guardar en SQLite una tabla llamada países y exporta a un archivo “data.json” como lo dicta el requerimiento.
-
-Finalmente, la aplicación imprime por consola el Data Frame, genera e imprime los datos de Tiempo total, promedio,  máximo y mínimo de la columna de tiempos del Data Frame, usando las funciones que Pandas tiene para ello.
-
-A modo de prueba, al final se hace una consulta a la tabla en SQLite y se imprime la lista resultante por consola, pero esta parte no va en una posible versión de producción. 
