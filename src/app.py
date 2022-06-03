@@ -51,30 +51,30 @@ def add_countryRow_to_dataFrame( country, df ):
     
     return df
 
-if __name__=='__main__':
+if __name__ == '__main__':
     # listadePaises = ["Angola","Argentina", "Brasil", "Chile", "Colombia", "United States of America", "United K", "Uruguay", "Venezuela", "España","Valledupar","Bogota"]
     if len( sys.argv ) > 1:
         listCountries = sys.argv[1:]
 
         for country in listCountries:
-            df = add_countryRow_to_dataFrame( listCountries, df)
+            df = add_countryRow_to_dataFrame( listCountries, df )
             
     
-        print('_____________________________________________________________')
+        print( '_____________________________________________________________' )
 
-        print(df)
+        print( df )
     
-        print("Tiempo total: ",df["Time(ms)"].sum(), "ms")    
-        print("Tiempo promedio: ",df["Time(ms)"].mean(), "ms")    
-        print("Tiempo Mínimo: ",df["Time(ms)"].min(), "ms")
-        print("Tiempo Máximo: ",df["Time(ms)"].max(), "ms")
+        print( "Tiempo total: ", df[ "Time(ms)" ].sum(), "ms")    
+        print( "Tiempo promedio: ", df["Time(ms)"].mean(), "ms")    
+        print( "Tiempo Mínimo: ", df["Time(ms)"].min(), "ms")
+        print( "Tiempo Máximo: ", df["Time(ms)"].max(), "ms")
 
         # Guardar DataFrame en una base de datos 
-        df.to_sql('paises', engine, if_exists='replace')
+        df.to_sql( 'paises', engine, if_exists = 'replace' )
         # Guardar DataFrame en un json
-        df.to_json('data.json')
+        df.to_json( 'data.json' )
         
         # Consulta a la base de datos para probar que se guardaron los datos
-        print(engine.execute("SELECT * FROM paises").fetchall())
+        print( engine.execute( "SELECT * FROM paises" ).fetchall() )
     else:
-        print("No se ingresaron paises")    
+        print( "No se ingresaron paises" )    
