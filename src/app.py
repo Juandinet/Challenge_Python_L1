@@ -59,7 +59,6 @@ if __name__ == '__main__':
         for country in listCountries:
             df = add_countryRow_to_dataFrame( listCountries, df )
             
-    
         print( '_____________________________________________________________' )
 
         print( df )
