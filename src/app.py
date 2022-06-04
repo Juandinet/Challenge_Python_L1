@@ -63,7 +63,7 @@ if __name__ == '__main__':
         listCountries = sys.argv[1:]
 
         for country in listCountries:
-            df = add_countryRow_to_dataFrame( listCountries, df )
+            df = add_countryRow_to_dataFrame( country, df )
             
         print( '_____________________________________________________________' )
 
