@@ -44,7 +44,7 @@ def generate_countryRow( country_name ):
     else:
         endTime = time.time()
         time_generated_row = ( endTime - startTime ) * 1000
-        print( f"No se encontraron datos del pais { country }, tiempo de búsqueda {time_generated_row}ms" )           
+        print( f"No se encontraron datos del pais { country_name }, tiempo de búsqueda {time_generated_row}ms" )           
         country_row = None           
     return country_row
 
