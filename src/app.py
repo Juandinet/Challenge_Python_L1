@@ -4,56 +4,57 @@ import pandas as pd
 import hashlib
 from sqlalchemy import create_engine
 import sys
-df = pd.DataFrame( columns = ["Region", "Country Name","Languaje", "Time(ms)"] )
-engine = create_engine( 'sqlite://', echo = False )
+df = pd.DataFrame(columns=["Region", "Country Name", "Languaje", "Time(ms)"])
+engine = create_engine('sqlite://', echo=False)
 
-def get_DataCuntry( countryName ):
+
+def get_DataCuntry(countryName):
     """
     Given a countryName, it queries restcountries.com and returns a list with the country's data
-    
+
     :param countryName: The name of country you want to get the data from
     :return: A list of dictionaries.
     """
     try:
         url = "https://restcountries.com/v2/name/" + countryName
-        response = requests.get( url )
-        
+        response = requests.get(url)
         if response.status_code == 200:
             return response.json()
-            
         else:
             return None
-        
     except:
-        print( 'la url no responde' )
+        print('la url no responde')
         exit()
-        
-    
 
-def generate_countryRow( countryName ):
+
+def generate_countryRow(countryName):
     """
     Given a countryName name, it returns a list with the region, name, hash of the language and the time it
     took to generate the row
-    
+
     :param countryName: The name of the country to search for
     :return: A list of data from the country.
     """
     startTime = time.time()
-    dataCountry = get_DataCuntry( countryName )
+    dataCountry = get_DataCuntry(countryName)
     if dataCountry is not None:
         country_lang = dataCountry[0]['languages'][0]['name']
-        hash_country_lang = hashlib.sha1(country_lang.encode( 'utf-8' ) ).hexdigest()
+        hash_country_lang = hashlib.sha1(
+            country_lang.encode('utf-8')).hexdigest()
         endTime = time.time()
-        time_generated_row = ( endTime - startTime ) * 1000
-        country_row = [ dataCountry[ 0 ][ 'region' ], dataCountry[ 0 ][ 'name' ], hash_country_lang, time_generated_row ] 
+        time_generated_row = (endTime - startTime) * 1000
+        country_row = [dataCountry[0]['region'], dataCountry[0]
+                       ['name'], hash_country_lang, time_generated_row]
     else:
         endTime = time.time()
-        time_generated_row = ( endTime - startTime ) * 1000
-        print( f"No se encontraron datos del pais { countryName }, tiempo de búsqueda {time_generated_row}ms" )           
-        country_row = None           
+        time_generated_row = (endTime - startTime) * 1000
+        print(
+            f"No se encontraron datos del pais { countryName }, tiempo de búsqueda {time_generated_row}ms")
+        country_row = None
     return country_row
 
-def add_countryRow_to_dataFrame( countryName, df ):
+
+def add_countryRow_to_dataFrame(countryName, df):
     """
     It takes a countryName name and a dataframe as input, and returns the dataframe with a new row added to
     it.
@@ -69,34 +70,32 @@ def add_countryRow_to_dataFrame( countryName, df ):
     :param df: the dataframe to add the row to
     :return: A dataframe with the country row added to it.
     """
-    country_row = generate_countryRow( countryName )
-    if country_row!=None:
-        df.loc[ len( df ) ] = country_row
+    country_row = generate_countryRow(countryName)
+    if country_row != None:
+        df.loc[len(df)] = country_row
     return df
+
 
 if __name__ == '__main__':
     # listadePaises = ["Angola","Argentina", "Brasil", "Chile", "Colombia", "United States of America", "United K", "Uruguay", "Venezuela", "España","Valledupar","Bogota"]
-    if len( sys.argv ) > 1:
+    if len(sys.argv) > 1:
         countries_list = sys.argv[1:]
-
         for country in countries_list:
-            df = add_countryRow_to_dataFrame( countries_list, df )
-            
-        print( '_____________________________________________________________' )
+            df = add_countryRow_to_dataFrame(countries_list, df)
 
-        print( df )
-    
-        print( "Tiempo total: ", df[ "Time(ms)" ].sum(), "ms")    
-        print( "Tiempo promedio: ", df["Time(ms)"].mean(), "ms")    
-        print( "Tiempo Mínimo: ", df["Time(ms)"].min(), "ms")
-        print( "Tiempo Máximo: ", df["Time(ms)"].max(), "ms")
+        print('_____________________________________________________________')
+        print(df)
+        print("Tiempo total: ", df["Time(ms)"].sum(), "ms")
+        print("Tiempo promedio: ", df["Time(ms)"].mean(), "ms")
+        print("Tiempo Mínimo: ", df["Time(ms)"].min(), "ms")
+        print("Tiempo Máximo: ", df["Time(ms)"].max(), "ms")
 
-        # Guardar DataFrame en una base de datos 
-        df.to_sql( 'paises', engine, if_exists = 'replace' )
+        # Guardar DataFrame en una base de datos
+        df.to_sql('paises', engine, if_exists='replace')
         # Guardar DataFrame en un json
-        df.to_json( 'data.json' )
-        
+        df.to_json('data.json')
+
         # Consulta a la base de datos para probar que se guardaron los datos
-        print( engine.execute( "SELECT * FROM paises" ).fetchall() )
+        print(engine.execute("SELECT * FROM paises").fetchall())
     else:
-        print( "No se ingresaron paises" )    
+        print("No se ingresaron paises")

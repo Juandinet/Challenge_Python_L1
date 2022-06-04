@@ -1,9 +1,8 @@
 import app
 import unittest
 import pandas as pd
-from sqlalchemy import create_engine
-df=pd.DataFrame(columns=["Region", "Country Name","Languaje", "Time(ms)"])
-# engine=create_engine('sqlite://', echo=False)
+df = pd.DataFrame(columns=["Region", "Country Name", "Languaje", "Time(ms)"])
+
 
 class TestApp(unittest.TestCase):
     def test_get_DataCuntry_Ang(self):
@@ -44,9 +43,8 @@ class TestApp(unittest.TestCase):
         fila = app.generate_countryRow(pais)
         self.assertEqual(fila[0], 'Americas')
         self.assertEqual(fila[1], 'Colombia')
-        self.assertEqual(fila[2], '8df7f1b361b2af42d36011e00d22c0f9891ec0b0')    
-    
-    
+        self.assertEqual(fila[2], '8df7f1b361b2af42d36011e00d22c0f9891ec0b0')
+
     def test_generate_countryRow_Ang(self):
         pais = 'Angola'
         fila = app.generate_countryRow(pais)
@@ -58,9 +56,9 @@ class TestApp(unittest.TestCase):
         pais = 'Valledupar'
         fila = app.generate_countryRow(pais)
         self.assertEqual(fila, None)
-    
+
     def test_add_countryRow_to_dataFrame(self):
-        listadePaises = ["Angola","Argentina","España","Valledupar"]
+        listadePaises = ["Angola", "Argentina", "España", "Valledupar"]
         for pais in listadePaises:
             app.add_countryRow_to_dataFrame(pais, df)
         self.assertEqual(df["Region"][0], 'Africa')
@@ -68,6 +66,3 @@ class TestApp(unittest.TestCase):
         self.assertEqual(df["Region"][1], 'Americas')
         self.assertEqual(df["Country Name"][1], 'Argentina')
         self.assertEqual(df["Region"][len(df)-1], 'Europe')
-            
-    
-    
