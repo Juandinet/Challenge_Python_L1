@@ -81,7 +81,7 @@ if __name__ == '__main__':
     if len(sys.argv) > 1:
         countries_list = sys.argv[1:]
         for country in countries_list:
-            df = add_countryRow_to_dataFrame(countries_list, df)
+            df = add_countryRow_to_dataFrame(country, df)
 
         print('_____________________________________________________________')
         print(df)
